@@ -15,6 +15,8 @@ const tasks = [
 module.exports = async function(context) {
   context.res = {
     // return a random task
-    body: tasks[Math.floor(Math.random() * tasks.length)],
+    body: {
+      task: tasks[Math.floor(Math.random() * tasks.length)],
+    },
   };
 };
