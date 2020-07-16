@@ -5,4 +5,6 @@ module.exports = {
     'src/**/*.{js,vue}',
     '!src/main.js', // No need to cover the bootstrap file
   ],
+
+  setupFilesAfterEnv: ['./tests/unit/setup.js'],
 };
