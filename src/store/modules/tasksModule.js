@@ -32,7 +32,7 @@ export default {
     CREATE_TASK({ commit }, task) {
       const id = String(Date.now() + Math.random());
 
-      commit({ id, task, isDone: false });
+      commit('STORE_TASK', { id, task, isDone: false });
     },
   },
 };

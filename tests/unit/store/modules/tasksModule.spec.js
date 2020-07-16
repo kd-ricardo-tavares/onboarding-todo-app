@@ -136,7 +136,18 @@ describe('tasksModule', () => {
   describe('actions', () => {
     describe('CREATE_TASK', () => {
       it('stores a new task with a random id', () => {
-        expect(tasksModule.state.tasks).toEqual({});
+        const commit = jest.fn();
+        const task = 'task';
+
+        tasksModule.actions.CREATE_TASK({ commit }, task);
+        tasksModule.actions.CREATE_TASK({ commit }, task);
+
+        expect(commit).toHaveBeenCalledTimes(2);
+
+        // expect the ids to be different
+        expect(commit.mock.calls[0][1].id).not.toEqual(
+          commit.mock.calls[1][1].id,
+        );
       });
     });
   });
