@@ -45,10 +45,10 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: 'Deploy to Azure Web App'
-      uses: azure/webapps-deploy@v1
-      with:
-        app-name: 'onboarding-todo-app'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4326c4c1f8014da6a527034db93d1932 }}
-        package: ./dist
+    # - name: 'Deploy to Azure Web App'
+    #   uses: azure/webapps-deploy@v1
+    #   with:
+    #     app-name: 'onboarding-todo-app'
+    #     slot-name: 'production'
+    #     publish-profile: ${{ secrets.AzureAppService_PublishProfile_4326c4c1f8014da6a527034db93d1932 }}
+    #     package: ./dist
