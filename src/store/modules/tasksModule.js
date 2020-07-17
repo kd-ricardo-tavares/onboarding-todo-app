@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import randomTasksService from '../../services/randomTasksService';
 
 export default {
   namespaced: true,
@@ -33,6 +34,11 @@ export default {
       const id = String(Date.now() + Math.random());
 
       commit('STORE_TASK', { id, task, isDone: false });
+    },
+    async CREATE_RANDOM_TASK({ dispatch }) {
+      const task = await randomTasksService.getRandomTask();
+
+      dispatch('CREATE_TASK', task);
     },
   },
 };

@@ -1,4 +1,10 @@
 import tasksModule from '@/store/modules/tasksModule';
+import randomTasksService from '@/services/randomTasksService';
+
+jest.mock('@/services/randomTasksService', () => ({
+  __esModule: true,
+  default: { getRandomTask: jest.fn() },
+}));
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -148,6 +154,23 @@ describe('tasksModule', () => {
         expect(commit.mock.calls[0][1].id).not.toEqual(
           commit.mock.calls[1][1].id,
         );
+      });
+    });
+
+    describe('CREATE_RANDOM_TASK', () => {
+      it('fetches a random task and dispatches the create task action with the result', async () => {
+        const dispatch = jest.fn();
+        const task = 'task';
+        const randomTask = 'random task';
+
+        randomTasksService.getRandomTask.mockReturnValueOnce(
+          Promise.resolve(randomTask),
+        );
+
+        await tasksModule.actions.CREATE_RANDOM_TASK({ dispatch }, task);
+
+        expect(randomTasksService.getRandomTask).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledWith('CREATE_TASK', randomTask);
       });
     });
   });
