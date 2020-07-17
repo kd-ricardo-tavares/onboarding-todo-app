@@ -32,4 +32,4 @@ jobs:
         app-name: 'onboarding-todo-app'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_4326c4c1f8014da6a527034db93d1932 }}
-        package: .
+        package: ./dist
