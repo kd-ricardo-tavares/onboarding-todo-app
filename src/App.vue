@@ -12,4 +12,27 @@
   text-align: center;
   color: #2c3e50;
 }
+
+.app-btn {
+  background-color: #fff;
+  color: #35495e;
+  cursor: pointer;
+  padding: 10px;
+  font-weight: bold;
+
+  border: 2px solid #35495e;
+
+  &:hover {
+    background-color: #35495e;
+    color: #fff;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.app-btn--small {
+  padding: 5px;
+}
 </style>
