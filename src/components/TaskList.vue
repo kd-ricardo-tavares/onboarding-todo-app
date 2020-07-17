@@ -1,5 +1,5 @@
 <template>
-  <div class="task-list">
+  <transition-group name="task-fade" tag="div" class="task-list">
     <div v-for="task in taskList" :key="task.id" class="task-list__task">
       <div class="task-list__task-description">
         {{ task.task }}
@@ -12,7 +12,7 @@
         Delete
       </button>
     </div>
-  </div>
+  </transition-group>
 </template>
 
 <script>
@@ -46,6 +46,7 @@ export default {
   display: flex;
   align-content: center;
   align-items: center;
+  transition: all 0.25s;
 
   &:hover {
     background-color: #afe3cc;
@@ -54,5 +55,16 @@ export default {
 
 .task-list__task-description {
   flex: 1;
+}
+
+.task-fade-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.task-fade-enter {
+  opacity: 0;
+  transform: translateY(-30px);
+  background-color: #afe3cc;
 }
 </style>
