@@ -20,6 +20,7 @@ beforeEach(() => {
 
   actions = {
     CREATE_TASK: jest.fn(),
+    CREATE_RANDOM_TASK: jest.fn(() => Promise.resolve()),
   };
 
   store = new Vuex.Store({
@@ -61,9 +62,25 @@ describe('TaskList.vue', () => {
     expect(actions.CREATE_TASK).not.toHaveBeenCalled();
   });
 
-  it('disables the button when there is no text in the input', () => {
+  it('disables the create button when there is no text in the input', () => {
     const wrapper = shallowMount(CreateTask, { store, localVue });
 
     expect(wrapper.find('.create-task__create-btn').element).toBeDisabled();
+  });
+
+  it('dispatches the create random task action when the random button is clicked', () => {
+    const wrapper = shallowMount(CreateTask, { store, localVue });
+
+    wrapper.find('.create-task__random-btn').trigger('click');
+
+    expect(actions.CREATE_RANDOM_TASK).toHaveBeenCalledTimes(1);
+  });
+
+  it('disables the random button when there is already a task being fetched', async () => {
+    const wrapper = shallowMount(CreateTask, { store, localVue });
+
+    await wrapper.setData({ isCreatingRandomTask: true });
+
+    expect(wrapper.find('.create-task__random-btn').element).toBeDisabled();
   });
 });

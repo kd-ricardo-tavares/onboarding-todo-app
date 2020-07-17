@@ -1,15 +1,30 @@
 <template>
-  <form class="create-task" @submit.prevent="createTask">
-    <input
-      v-model="task"
-      type="text"
-      class="create-task__input"
-      placeholder="New task"
-    />
-    <button :disabled="!task" type="text" class="create-task__create-btn">
-      Create task
+  <div>
+    <form class="create-task" @submit.prevent="createTask">
+      <input
+        v-model="task"
+        type="text"
+        class="create-task__input"
+        placeholder="New task"
+      />
+      <button
+        :disabled="!task"
+        type="submit"
+        class="app-btn create-task__create-btn"
+      >
+        Create task
+      </button>
+    </form>
+
+    <button
+      :disabled="isCreatingRandomTask"
+      type="button"
+      class="app-btn create-task__random-btn"
+      @click="createRandomTask"
+    >
+      Create a random task
     </button>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -19,6 +34,7 @@ export default {
   data() {
     return {
       task: '',
+      isCreatingRandomTask: false,
     };
   },
 
@@ -28,6 +44,17 @@ export default {
         this.$store.dispatch('tasks/CREATE_TASK', this.task);
 
         this.task = '';
+      }
+    },
+
+    async createRandomTask() {
+      try {
+        this.isCreatingRandomTask = true;
+        await this.$store.dispatch('tasks/CREATE_RANDOM_TASK');
+      } catch (e) {
+        // show an error
+      } finally {
+        this.isCreatingRandomTask = false;
       }
     },
   },
@@ -41,28 +68,15 @@ export default {
   width: 300px;
 
   &:focus {
-    border-color: #35495E;
+    border-color: #35495e;
   }
 }
 
 .create-task__create-btn {
-  background-color: #fff;
-  color: #35495E;
-  cursor: pointer;
-  padding: 10px;
-  font-weight: bold;
-
-  border: 2px solid #35495E;
-
   margin-left: 10px;
+}
 
-  &:hover {
-    background-color: #35495E;
-    color: #fff;
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
+.create-task__random-btn {
+  margin-top: 20px;
 }
 </style>
