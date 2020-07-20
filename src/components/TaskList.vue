@@ -39,6 +39,7 @@ export default {
   width: 700px;
   margin: 0 auto;
   margin-top: 10px;
+  position: relative;
 }
 
 .task-list__task {
@@ -46,7 +47,7 @@ export default {
   display: flex;
   align-content: center;
   align-items: center;
-  transition: all 0.25s;
+  transition: all 0.5s;
 
   &:hover {
     background-color: #afe3cc;
@@ -66,5 +67,10 @@ export default {
   opacity: 0;
   transform: translateY(-30px);
   background-color: #afe3cc;
+}
+
+.task-fade-leave-active {
+  width: 100%;
+  position: absolute;
 }
 </style>
