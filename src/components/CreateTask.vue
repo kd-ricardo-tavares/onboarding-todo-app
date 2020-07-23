@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form class="create-task" @submit.prevent="createTask">
+  <div class="create-task">
+    <form @submit.prevent="createTask">
       <input
         v-model="task"
         type="text"
@@ -61,7 +61,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .create-task__input {
   padding: 10px;
   border: 2px solid #41b883;
